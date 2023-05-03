@@ -1,0 +1,22 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+export const fakeStoreApi = createApi({
+  reducerPath: 'fakeStoreApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://api.escuelajs.co/api/v1/products',
+    prepareHeaders: (headers) => {
+      headers.set(
+        'X-RapidApi-Key',
+        '1cc6289a84mshcb6db979254728bp1ad6dfjsn00439851ff4e',
+      );
+      return headers;
+    },
+  }),
+  endpoints: (builder) => ({
+    getTopCharts: builder.query({
+      query: () => '/',
+    }),
+  }),
+});
+
+export const { useGetTopChartsQuery } = fakeStoreApi;
