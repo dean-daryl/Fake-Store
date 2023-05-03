@@ -11,21 +11,22 @@ const Posts = () => {
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('categoryId', category);
-    formData.append('image', image);
-    dispatch(addProduct(formData));
-    setTitle('');
-    setPrice('');
-    setDescription('');
-    setCategory('1');
-    setImage(null);
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const productData = {
+    title,
+    description,
+    price,
+    categoryId: category,
+    image,
   };
+  dispatch(addProduct(JSON.stringify(productData)));
+  setTitle('');
+  setPrice('');
+  setDescription('');
+  setCategory('1');
+  setImage(null);
+};
 
   return (
     <Layout>

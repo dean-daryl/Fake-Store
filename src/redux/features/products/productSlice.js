@@ -8,13 +8,13 @@ const initialState ={
 }
 export const fetchProducts = createAsyncThunk('user/fetchProducts', () => {
   return axios
-    .get('https://api.escuelajs.co/api/v1/products')
+    .get('https://api.escuelajs.co/api/v1/products?offset=0&limit=20')
     .then((response) => response.data);
 });
 export const addProduct = createAsyncThunk(
   'user/addProduct',
   async (newProduct) => {
-    const response = await axios.post(
+    const response = await axios.post( 
       'https://api.escuelajs.co/api/v1/products/',
       newProduct,
     );
