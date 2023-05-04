@@ -21,7 +21,16 @@ export const addProduct = createAsyncThunk(
     return response.data;
   },
 );
-
+export const deleteProduct = createAsyncThunk(
+  'user/addProduct',
+  async (newProduct) => {
+    const response = await axios.delete(
+      'https://api.escuelajs.co/api/v1/products/:id',
+      newProduct,
+    );
+    return response.data;
+  },
+);
 const productSlice = createSlice({
   name: 'product',
   initialState,

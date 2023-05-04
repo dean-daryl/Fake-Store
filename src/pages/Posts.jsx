@@ -1,32 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addProduct } from '../redux/features/products/productSlice';
 import { Layout } from '../components';
 
 const Posts = () => {
+      const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('1');
-  const [image, setImage] = useState(null);
+  const [categoryId, setCategory] = useState('1');
+  const [images, setImage] = useState(['']);
   const dispatch = useDispatch();
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const productData = {
-    title,
-    description,
-    price,
-    categoryId: category,
-    image,
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      addProduct({
+        images,
+        title,
+        description,
+        categoryId,
+        price,
+      }),
+    );
+    window.location.href=`https://api.escuelajs.co/api/v1/products/?title=${title}`
   };
-  dispatch(addProduct(JSON.stringify(productData)));
-  setTitle('');
-  setPrice('');
-  setDescription('');
-  setCategory('1');
-  setImage(null);
-};
 
   return (
     <Layout>
@@ -59,7 +58,7 @@ const handleSubmit = (e) => {
           <label>
             Category:
             <select
-              value={category}
+              value={categoryId}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="1">Category 1</option>
@@ -69,7 +68,11 @@ const handleSubmit = (e) => {
           </label>
           <label>
             Image:
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+            <input
+              type="text"
+              value={images}
+              onChange={(e) => setImage([`${e.target.value}`])}
+            />
           </label>
           <button type="submit">Add Product</button>
         </form>

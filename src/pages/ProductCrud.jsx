@@ -8,10 +8,10 @@ const ProductCrud = () => {
         <a href="/AddProduct">
           <button>Add Product</button>
         </a>
-        <a href="/products/delete">
+        <a href="/DeleteProduct">
           <button>Delete Product</button>
         </a>
-        <a href="products/update">
+        <a href="/DeleteProduct">
           <button>Update Product</button>
         </a>
       </div>
